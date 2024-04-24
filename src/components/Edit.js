@@ -53,6 +53,8 @@ const Edit = () => {
             onChange={(e) => setAge(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        <Button onClick={() => navigate("/")}>Cancel</Button>
+        &nbsp;
         <Button onClick={(e) => handleSubmit(e)} type="submit">
           Update
         </Button>
