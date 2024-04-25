@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <Fragment>
       <div style={{ margin: "10rem" }}>
-        <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm" variant="dark">
           <thead>
             <tr>
               <th>Name</th>
@@ -49,6 +49,7 @@ const Home = () => {
                       <td>
                         <Link to={"/edit"}>
                           <Button
+                            variant="outline-light"
                             onClick={() =>
                               handleEdit(item.id, item.Name, item.Age)
                             }
@@ -57,7 +58,10 @@ const Home = () => {
                           </Button>
                         </Link>
                         &nbsp;
-                        <Button onClick={() => handleDelete(item.id)}>
+                        <Button
+                          variant="outline-light"
+                          onClick={() => handleDelete(item.id)}
+                        >
                           Delete
                         </Button>
                       </td>
@@ -67,9 +71,10 @@ const Home = () => {
               : "No data available"}
           </tbody>
         </Table>
-
         <Link to={"/create"}>
-          <Button size="lg">Create</Button>
+          <Button variant="dark" size="lg">
+            Create
+          </Button>
         </Link>
       </div>
     </Fragment>
