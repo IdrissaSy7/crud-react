@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Stack, Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
-import { v4 as uuid } from "uuid"; // Identifiant unique
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [task, setTask] = useState("");
   const [id, setId] = useState("");
+  const [taskCompleted, setTaskCompleted] = useState("");
 
   const navigate = useNavigate();
 
@@ -20,46 +19,44 @@ const Edit = () => {
     e.preventDefault(); // Empêche le comportement par défaut de la fonction
 
     let a = List[index];
-    a.Name = name;
-    a.Age = age;
+    a.task = task;
 
     navigate("/"); // Navigue vers la page d'accueil
   };
 
   useEffect(() => {
-    setName(localStorage.getItem("Name"));
-    setAge(localStorage.getItem("Age"));
+    setTask(localStorage.getItem("Task"));
     setId(localStorage.getItem("Id"));
+    setTaskCompleted(localStorage.getItem(taskCompleted));
   }, []);
 
   return (
-    <div>
-      <Form style={{ margin: "15rem" }}>
-        <Form.Group controlId="formName">
-          <Form.Control
-            type="text"
-            placeholder="Enter name"
-            value={name}
-            required
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="formAge">
-          <Form.Control
-            type="text"
-            placeholder="Enter age"
-            value={age}
-            required
-            onChange={(e) => setAge(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Button onClick={() => navigate("/")}>Cancel</Button>
-        &nbsp;
-        <Button onClick={(e) => handleSubmit(e)} type="submit">
-          Update
-        </Button>
-      </Form>
-    </div>
+    <Container>
+      <Row className="mt-5">
+        <Form>
+          <Stack direction="horizontal" gap={3}>
+            <Form.Control
+              className="me-auto"
+              type="text"
+              value={task}
+              required
+              onChange={(e) => setTask(e.target.value)}
+            ></Form.Control>
+            <Button
+              variant="success"
+              onClick={(e) => handleSubmit(e)}
+              type="submit"
+            >
+              Modifier
+            </Button>
+            <div className="vr" />
+            <Button variant="success" onClick={() => navigate("/")}>
+              Fermer
+            </Button>
+          </Stack>
+        </Form>
+      </Row>
+    </Container>
   );
 };
 
